@@ -8,6 +8,20 @@ face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_fronta
 # Start video capture
 cap = cv2.VideoCapture(1)
 
+# Function to handle mouse events (for quit button)
+def handle_mouse_event(event, x, y, flags, param):
+    global quit_clicked
+    if event == cv2.EVENT_LBUTTONDOWN:
+        if x >= quit_button_x and x <= quit_button_x + quit_button_w and y >= quit_button_y and y <= quit_button_y + quit_button_h:
+            quit_clicked = True
+
+# Create a window with a quit button
+quit_button_x, quit_button_y, quit_button_w, quit_button_h = 10, 10, 100, 50
+quit_button_text = "Quit"
+quit_clicked = False
+cv2.namedWindow('Face Mask Detection')
+cv2.setMouseCallback('Face Mask Detection', handle_mouse_event)
+
 while cap.isOpened():
     ret, frame = cap.read()
     if not ret:
@@ -46,7 +60,6 @@ while cap.isOpened():
         mask_percentage = (mask_pixels / total_pixels) * 100
         
         # Assuming a mask is present if the mask percentage is above a threshold
-        #
         if mask_percentage > 10:  # Adjust threshold as needed
             label = "Mask"
             color = (0, 255, 0)  # Green color for mask
@@ -61,7 +74,15 @@ while cap.isOpened():
         # Add timestamp
         cv2.putText(frame, str(datetime.datetime.now()), (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
 
+    # Draw quit button on the frame
+    cv2.rectangle(frame, (quit_button_x, quit_button_y), (quit_button_x + quit_button_w, quit_button_y + quit_button_h), (255, 100, 102), -1)
+    cv2.putText(frame, quit_button_text, (quit_button_x + 10, quit_button_y + 35), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2)
+    
     cv2.imshow('Face Mask Detection', frame)
+    
+    # Check if quit button is clicked
+    if quit_clicked:
+        break
     
     # Press 'q' to exit
     if cv2.waitKey(1) & 0xFF == ord('q'):
