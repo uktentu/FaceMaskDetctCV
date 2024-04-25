@@ -5,12 +5,12 @@ This project demonstrates real-time face mask detection using OpenCV and a pre-t
 ## Installation
 
 1. Clone the repository to your local machine:
-
+```bash
    git clone https://github.com/uktentu/FaceMaskDetctCV.git
 
 2. Navigate to the project directory:
 
-   cd face-mask-detection
+   cd FaceMaskDetctCV
 
 3. Create a virtual environment (optional but recommended):
 
