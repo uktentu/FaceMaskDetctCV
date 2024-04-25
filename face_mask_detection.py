@@ -75,7 +75,7 @@ while cap.isOpened():
         cv2.putText(frame, str(datetime.datetime.now()), (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
 
     # Draw quit button on the frame
-    cv2.rectangle(frame, (quit_button_x, quit_button_y), (quit_button_x + quit_button_w, quit_button_y + quit_button_h), (255, 100, 102), -1)
+    cv2.rectangle(frame, (quit_button_x, quit_button_y), (quit_button_x + quit_button_w, quit_button_y + quit_button_h), (102, 100, 255), -1)
     cv2.putText(frame, quit_button_text, (quit_button_x + 10, quit_button_y + 35), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2)
     
     cv2.imshow('Face Mask Detection', frame)
