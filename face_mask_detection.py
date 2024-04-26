@@ -60,7 +60,7 @@ while cap.isOpened():
         mask_percentage = (mask_pixels / total_pixels) * 100
         
         # Assuming a mask is present if the mask percentage is above a threshold
-        if mask_percentage > 10:  # Adjust threshold as needed
+        if mask_percentage > 2:  # Adjust threshold as needed
             label = "Mask"
             color = (0, 255, 0)  # Green color for mask
         else:
